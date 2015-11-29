@@ -157,11 +157,7 @@ public class AddBook extends Fragment implements LoaderManager.LoaderCallbacks<C
         if (requestCode == AddBook.REQUEST_TAKE_PHOTO && resultCode == Activity.RESULT_OK) {
             BarcodeDetector detector =
                     new BarcodeDetector.Builder(getActivity().getApplicationContext())
-                            .setBarcodeFormats(Barcode.DATA_MATRIX |
-                                    Barcode.QR_CODE |
-                                    Barcode.ISBN |
-                                    Barcode.EAN_13 |
-                                    Barcode.EAN_8)
+                            .setBarcodeFormats(Barcode.EAN_13)
                             .build();
 
             if (detector.isOperational()) {
@@ -170,7 +166,6 @@ public class AddBook extends Fragment implements LoaderManager.LoaderCallbacks<C
 
                     Frame frame = new Frame.Builder().setBitmap(bitmap).build();
                     SparseArray<Barcode> barcodes = detector.detect(frame);
-                    Log.v(TAG, "Number of barcodes: " + barcodes.size());
 
                     if (barcodes.size() > 0) {
                         Barcode barcode = barcodes.valueAt(0);
