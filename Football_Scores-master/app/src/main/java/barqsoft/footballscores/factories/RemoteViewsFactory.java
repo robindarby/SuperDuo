@@ -11,8 +11,8 @@ import java.util.Date;
 
 import barqsoft.footballscores.DatabaseContract;
 import barqsoft.footballscores.R;
+import barqsoft.footballscores.ScoresAdapter;
 import barqsoft.footballscores.Utilies;
-import barqsoft.footballscores.scoresAdapter;
 
 /**
  * Created by darby on 12/3/15.
@@ -63,13 +63,13 @@ public class RemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory
 
         RemoteViews rv = new RemoteViews(mContext.getPackageName(), R.layout.widget_list_item);
 
-        if(mCursor.moveToPosition(position)) {
-            rv.setTextViewText(R.id.home_name, mCursor.getString(scoresAdapter.COL_HOME) );
-            rv.setTextViewText(R.id.away_name, mCursor.getString(scoresAdapter.COL_AWAY) );
-            rv.setTextViewText(R.id.data_textview, mCursor.getString(scoresAdapter.COL_MATCHTIME) );
-            rv.setTextViewText(R.id.score_textview, Utilies.getScores(mCursor.getInt(scoresAdapter.COL_HOME_GOALS), mCursor.getInt(scoresAdapter.COL_AWAY_GOALS)));
-            rv.setImageViewResource(R.id.home_crest, Utilies.getTeamCrestByTeamName(mCursor.getString(scoresAdapter.COL_HOME)));
-            rv.setImageViewResource(R.id.away_crest, Utilies.getTeamCrestByTeamName(mCursor.getString(scoresAdapter.COL_AWAY)));
+        if (mCursor.moveToPosition(position)) {
+            rv.setTextViewText(R.id.home_name, mCursor.getString(ScoresAdapter.COL_HOME));
+            rv.setTextViewText(R.id.away_name, mCursor.getString(ScoresAdapter.COL_AWAY));
+            rv.setTextViewText(R.id.data_textview, mCursor.getString(ScoresAdapter.COL_MATCHTIME));
+            rv.setTextViewText(R.id.score_textview, Utilies.getScores(mCursor.getInt(ScoresAdapter.COL_HOME_GOALS), mCursor.getInt(ScoresAdapter.COL_AWAY_GOALS)));
+            rv.setImageViewResource(R.id.home_crest, Utilies.getTeamCrestByTeamName(mCursor.getString(ScoresAdapter.COL_HOME)));
+            rv.setImageViewResource(R.id.away_crest, Utilies.getTeamCrestByTeamName(mCursor.getString(ScoresAdapter.COL_AWAY)));
         }
 
         return rv;
